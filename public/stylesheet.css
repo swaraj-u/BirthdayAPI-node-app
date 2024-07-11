@@ -1,0 +1,153 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    width:100vw;
+    height:100vh;
+    box-sizing:border-box;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+}
+
+nav h1{
+    color:black;
+    font-size:60px;
+}
+nav div{
+   
+    color:gray;
+    margin-bottom:10px;
+}
+nav{
+    border-bottom:1px solid black;
+    margin-bottom:10px;
+}
+
+#home-navbar{
+    display:flex;
+    justify-content:flex-end;
+    width:100%;
+}
+
+#home-navbar a{
+    text-decoration:none;
+}
+
+#create{
+    padding:10px;
+    background-color:black;
+    border-radius:10px;
+    font-weight:500;
+    color:white;
+    margin-bottom:10px;
+    margin-left:10px;
+}
+#search{
+    padding:10px;
+    background-color:black;
+    border-radius:10px;
+    font-weight:500;
+    color:white;
+    margin-bottom:10px;
+    margin-left:10px;
+}
+#closest{
+    padding:10px;
+    background-color:black;
+    border-radius:10px;
+    font-weight:500;
+    color:white;
+    margin-bottom:10px;
+}
+.birthday{
+    border-left:10px solid grey;
+    border-radius:5px;
+    box-sizing:border-box;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    width:100%;
+    height:60px;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+.birthdayText{
+    display:flex;
+    flex-direction:column;
+}
+
+.trashDiv{
+    margin-left:10px;
+}
+
+.trashDiv svg{
+    width:20px;
+    height:20px;
+    opacity:0;
+}
+
+.editDiv svg{
+    width:20px;
+    height:20px;
+    opacity:0;
+}
+
+.trashDiv svg:hover{
+    cursor:pointer;
+}
+
+.editDiv svg:hover{
+    cursor:pointer;
+}
+
+.logos{
+    display:flex;
+    height:100%;
+    align-items:center;
+}
+
+.birthday:hover .trashDiv svg{
+    opacity:1;
+}
+
+.birthday:hover .editDiv svg{
+    opacity:1;
+}
+
+
+.birthday:hover{
+    border:1px solid black;
+}
+
+section form input{
+    height:25px;
+    border-radius:10px;
+    padding:0px 10px;
+}
+
+#submitButton{
+    padding:10px;
+    border-radius:10px;
+    background-color:black;
+    color:white;
+}
+
+#searchedBack{
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:10px;
+    color:white;
+    background-color:black;
+    display:inline-block;
+}
+
+nav a{
+    text-decoration:none;
+}
+
+.border{
+    border:1px solid black;
+}
