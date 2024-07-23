@@ -103,28 +103,105 @@ app.get("/search/:id",(req,res)=> {
 
 app.get("/closest_b'day", (req,res) => {
     const currentDate = new Date();
-    // res.send(date);
     birthday.find()
     .then(results => {
-        let counterMonth = currentDate;
+        let collectedDates = [];
+        let counterMonth = [];
         let minMonth = Infinity;
-        let counterDay = currentDate;
-        let minDay = Infinity;
         results.forEach(result => {
             const DOB =  result.birthdayDate;
             if(Math.abs(currentDate.getMonth() - DOB.getMonth()) < minMonth)
             {
                 minMonth = Math.abs(currentDate.getMonth() - DOB.getMonth());
-                counterMonth = DOB.getMonth + 1;
+                counterMonth = [];
+                collectedDates = [];
+                counterMonth.push(DOB.getMonth() + 1);
+                collectedDates.push(DOB);
             }
-            if(Math.abs(currentDate.getDate() - DOB.getDate()) < minDay)
-                {
-                    minDay = Math.abs(currentDate.getDate() - DOB.getDate());
-                    counterDay = DOB.getDate;
-                }
+            else if(Math.abs(currentDate.getMonth() - DOB.getMonth()) === minMonth)
+            {
+                counterMonth.push(DOB.getMonth() + 1);
+                collectedDates.push(DOB);
+            }
         });
+        if(counterMonth.length === 1)
+        {
+            const closestFoundBirthday = collectedDates[0];
+            birthday.find({birthdayDate: closestFoundBirthday})
+            .then(result => {
+                res.render("closest", {birthdays: result});
+            })
+            .catch(error => console.log(error));
+        }
+        else if(counterMonth.length > 1)
+        {
+            if(counterMonth[0] === (currentDate.getMonth() + 1) )
+            {
+                let minDay = Infinity
+                let counter = [];
+                collectedDates.forEach(collectedDate => {
+                    if(collectedDate.getDate() - currentDate.getDate() > 0)
+                    {
+                        if(collectedDate.getDate() - currentDate.getDate() < minDay)
+                        {
+                            minDay = collectedDate.getDate() - currentDate.getDate();
+                            counter=[];
+                            counter.push(collectedDate);
+                        }
+                        else if(collectedDate.getDate() - currentDate.getDate() === minDay)
+                        {
+                            counter.push(collectedDate);
+                        }
+                    }
+                })
+                let foundDates = [];
+                const promises = counter.map(counterDate => {
+                return birthday.findOne({ birthdayDate: counterDate })
+                    .then(result => {
+                    foundDates.push(result);
+                    })
+                    .catch(error => console.log(error));
+                });
 
-        
+                Promise.all(promises)
+                .then(() => {
+                    res.render("closest", {birthdays: foundDates});
+                    console.log("page rendered same month", counterMonth, counterMonth.length);
+                })
+                .catch(error => console.log(error));
+            }
+            else{
+                let minDay = Infinity
+                let counter = [];
+                collectedDates.forEach(collectedDate => {
+                        if(collectedDate.getDate() - 1 < minDay)
+                        {
+                            minDay = collectedDate.getDate() -1;
+                            counter=[];
+                            counter.push(collectedDate);
+                        }
+                        else if(collectedDate.getDate() - 1 === minDay)
+                        {
+                            counter.push(collectedDate);
+                        }
+                    })
+                let foundDates = [];
+                const promises = counter.map(counterDate => {
+                return birthday.findOne({ birthdayDate: counterDate })
+                    .then(result => {
+                    foundDates.push(result);
+                    })
+                    .catch(error => console.log(error));
+                });
+    
+                Promise.all(promises)
+                .then(() => {
+                    res.render("closest", {birthdays: foundDates});
+                    console.log("page rendered")
+                })
+                .catch(error => console.log(error));
+            }
+        }
     })
     .catch(err => console.log(err));
 })
