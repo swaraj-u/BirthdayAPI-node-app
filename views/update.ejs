@@ -4,22 +4,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BDay Dumproom | Update</title>
     <link rel="stylesheet" href="/stylesheet.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="container">
     <nav>
         <h1>Update Birthdate</h1>
+        <a href="/"><div class="searchedBack">Back</div></a>
     </nav>
     <section>
         <form action="/update/<%= birthday._id %>" method="POST">
         <label>Person's Name:</label>
         <input type="text" name="person" value="<%= birthday.person %>" readonly /></br></br>
-        <label>Date Of Birth:</label></br>
+        <label>Date Of Birth:</label></br></br>
         <label>Earlier:</label>
-        <input type="text" name="earlierBirthdayDate" value="<%= birthdayDate %>" readonly/></br>
+        <input id="earlierBirthdayDate" type="text" name="earlierBirthdayDate" value="<%= birthdayDate %>" readonly/></br>
         <label>Change To:</label>
         <input type="date" name="presentBirthdayDate" required  /></br>
-        <button id="submitButton">Submit</button>
+        <button class="submitButton">Submit</button>
         </form>
     </section>
+    </div>
 </body>
 </html>
