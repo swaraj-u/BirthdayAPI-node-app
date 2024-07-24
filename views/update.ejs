@@ -16,12 +16,12 @@
     </nav>
     <section>
         <form action="/update/<%= birthday._id %>" method="POST">
-        <label>Person's Name:</label>
+        <label>Person's Name:</label></br>
         <input type="text" name="person" value="<%= birthday.person %>" readonly /></br></br>
-        <label>Date Of Birth:</label></br></br>
-        <label>Earlier:</label>
+        <label id="dateOfBirthTag">Date Of Birth:</label>
+        <label>Earlier:</label></br>
         <input id="earlierBirthdayDate" type="text" name="earlierBirthdayDate" value="<%= birthdayDate %>" readonly/></br>
-        <label>Change To:</label>
+        <label>Change To:</label></br>
         <input type="date" name="presentBirthdayDate" required  /></br>
         <button class="submitButton">Submit</button>
         </form>
